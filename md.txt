@@ -1,0 +1,79 @@
+#编译
+./build.sh --product-name a311d –ccache
+./build.sh --product-name unionpi_tiger –ccache
+#打包
+./device/unionman/build/packer-unionpi.sh
+./device/board/unionman/unionpi_tiger/common/tools/packer-unionpi.sh
+
+pwd	查看当前目录
+
+
+
+首先给执行权限：
+chmod +x 文件名（包括扩展后缀）
+
+之后执行程序：
+./ 文件名（包括扩展后缀）
+
+cp gpio_test /data/
+
+umount /storage/sda1/
+
+jobs查看进程
+fg
+
+grep ^ /sys/block/*/queue/rotational 磁盘	lsblk
+lscpu	cpu
+free -m  内存
+
+free -h
+df -h
+
+
+mount -o remount,rw / 
+
+
+/etc/init.A311D.cfg
+
+ctrl+shift+f	繁体切换
+
+Z:\OpenHarmony-3.1-release\out\a311d\lib.unstripped\gpioled_subsys\gpioled_part	.so
+
+
+ninja -C out/a311d/ gpio_hdf_test
+
+
+
+git log
+git reset e51cef52c610d8b873e99e4ea83fbc84c1728906	返回
+
+
+./vendor/etc/init.A311D.cfg
+
+
+aarch64-linux-gnu-objdump
+
+wms_server
+
+
+各位领导、同事：
+    上午好！
+    广发银行将为九联小伙伴上门办理惠州社保卡，具体安排如下：
+
+    办理时间：本周三（明天）上午09：00
+    办理地点：五楼咖啡吧
+    办理要求：本人携带身份证、手机现场办理
+
+    如有需要办理的，可点击以下链接报名登记，广发银行统一登门办理。
+【腾讯文档】社保卡办理登记
+https://docs.qq.com/form/page/DZUdnVkhvQVNKc3ho
+
+       如有疑问，可联系人力资源1部 韦嘉纯 处。
+
+                   人力资源1部
+
+
+
+
+
+git clean -fdx
