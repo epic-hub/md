@@ -82,5 +82,5 @@ git clean -fdx
 
 # linux
 
-n -sf /usr/lib/libfreetype.so /usr/lib/libfreetype.so.6	链接
+ln -sf /usr/lib/libfreetype.so /usr/lib/libfreetype.so.6	链接
 sed -i 's#//foundation#\$foundation#' `grep "//foundation" -rl ./`	替换
