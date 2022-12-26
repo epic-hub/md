@@ -1,0 +1,1 @@
+ WLAN主要由站(Station，STA)、接入点(Access Point，AP)、无线介质( Wireless Medium，WM)和分布式系统(Distribution System，DS)组成。
