@@ -52,14 +52,23 @@ sudo docker run -d -v /home/epic/公共的:/srv -v /home/epic/公共的/filebrow
 
 # browser
 
-sudo docker run --rm -it -d --shm-size=512m -p 2053:6901 -e VNC_PW=password kasmweb/chrome:1.12.0
+sudo docker run --rm -it -d --shm-size=512m -p 9999:6901 -e VNC_PW=password kasmweb/chrome:1.12.0
 
 - User : kasm_user
 - Password: password
 
 
 
-
+```shell
+docker run -d \
+    --name=firefox \
+    -p 9999:5800 \
+    -e ENABLE_CJK_FONT=1 \
+    -e VNC_PASSWORD=123 \
+    -e KEEP_APP_RUNNING=1 \
+    -v $(pwd)/firefox:/config:rw \
+    jlesage/firefox
+```
 
 #  google/cadvisor
 
@@ -157,3 +166,134 @@ docker run --name myguacamole \
 -d -p 8080:8080 \
 guacamole/guacamole
 
+
+
+
+
+
+
+docker run -d \
+-e TZ=Asia/Shanghai \
+--name jellyfin \
+--restart always \
+-v /opt/jellyfin/config:/config \
+-v /opt/jellyfin/cache:/cache \
+-v /opt/jellyfin/Music:/Music \
+-v /opt/jellyfin/Movies:/Movies \
+-v /opt/jellyfin/Photo:/Photo \
+-p 8099:8096 \
+jellyfin/jellyfin
+
+
+
+
+
+
+
+mkdir -p ./plex/config
+mkdir -p ./plex/transcode
+mkdir -p ./plex/data
+mkdir -p ./plex/video
+mkdir -p ./plex/photo
+mkdir -p ./plex/music
+
+docker run \
+-d \
+-p 32400:32400 \
+-p 32400:32400/udp \
+--name plex \
+--network=host \
+--restart=always \
+-e TZ="Asia/Shanghai" \
+-e PLEX_CLAIM="claim-zJTKwdyy1nmoFZpx5job" \
+-e PUID=1000 \
+-e PGID=1000 \
+-v $(pwd)/plex/config:/config \
+-v $(pwd)/plex/transcode:/transcode \
+-v $(pwd)/plex/data:/data \
+-v $(pwd)/plex/video:/video \
+-v $(pwd)/plex/photo:/photo \
+-v $(pwd)/plex/music:/music \
+linuxserver/plex
+
+
+
+
+
+docker run -v /:/rootfs:ro -v /var/run:/var/run:rw -v /sys:/sys:ro -v /var/lib/docker/:/var/lib/docker:ro -p 7777:8080 --detach=true --privileged=true --name=cadvisor --restart=always google/cadvisor:latest
+
+
+
+
+```console
+docker run --name some-wordpress -p 6666:80 -d wordpress
+```
+
+docker run -dit -p 3333:8080 -p 6080:6080 -p 5999:5901 -v $(pwd):/root/下载 --name ubuntu1 ljdyw/ubuntu-novnc:latest
+
+```
+docker run -d \
+    --name aria2-pro \
+    --restart unless-stopped \
+    --log-opt max-size=1m \
+    -e PUID=$UID \
+    -e PGID=$GID \
+    -e UMASK_SET=022 \
+    -e RPC_SECRET=password \
+    -e RPC_PORT=6800 \
+    -p 6800:6800 \
+    -e LISTEN_PORT=6888 \
+    -p 6888:6888 \
+    -p 6888:6888/udp \
+    -v $PWD/config/aria2-config:/config \
+    -v $PWD/share/download/aria2-downloads:/downloads \
+    p3terx/aria2-pro
+```
+
+
+
+docker run -d --restart=always -v $(pwd)/alist:/opt/alist/data -p 5244:5244 --name="alist" xhofe/alist:latest
+
+
+
+```
+docker run -d \
+    --name ariang \
+    --log-opt max-size=1m \
+    --restart unless-stopped \
+    --network host \
+    p3terx/ariang --port 6880 --ipv6
+```
+
+
+
+```cmd
+docker run  -d -h mail.ewomail.com --restart=always \
+  -p 25:25 \
+  -p 109:109 \
+  -p 110:110 \
+  -p 143:143 \
+  -p 465:465 \
+  -p 587:587 \
+  -p 993:993 \
+  -p 995:995  \
+  -p 801:80 \
+  -p 8888:8080 \
+  -v `pwd`/mysql/:/ewomail/mysql/data/ \
+  -v `pwd`/vmail/:/ewomail/mail/ \
+  -v `pwd`/ssl/certs/:/etc/ssl/certs/ \
+  -v `pwd`/ssl/private/:/etc/ssl/private/ \
+  -v `pwd`/rainloop:/ewomail/www/rainloop/data \
+  -v `pwd`/ssl/dkim/:/ewomail/dkim/ \
+  --name ewomail bestwu/ewomailserver
+```
+
+
+
+
+
+
+
+```bash
+
+```
