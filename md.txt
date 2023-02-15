@@ -84,3 +84,42 @@ git clean -fdx
 
 ln -sf /usr/lib/libfreetype.so /usr/lib/libfreetype.so.6	链接
 sed -i 's#//foundation#\$foundation#' `grep "//foundation" -rl ./`	替换
+
+sudo crontab -e
+添加：
+
+# Rotate iptraf-ng log every 20mins
+*/20 * * * * /usr/sbin/logrotate -vf /etc/logrotate.d/iptraf-ng
+# Check iptraf-ng process every 5mins
+*/5 * * * * /home/agora/monitorP.sh
+
+
+
+
+
+- # Linux后台执行任务且不打印输出到终端
+
+  
+
+  **前言**
+
+  Linux运行脚本一般都会占用终端，对于很快结束的任务可能没什么，但是有很多任务会一直执行或者执行花费很长时间，这时把它转到后台执行是最明智的选择。
+
+  **正文**
+
+  运行如下命令即可将脚本转到后台运行：
+
+  ```
+  # ./DINA.py &
+  ```
+
+  DINA.py就是我要运行的脚本，就在当前文件夹下，命令末尾加个&就可以转后台运行。
+
+  但是这种方式有个缺陷，就是它的输出还是会打印到终端，给我们造成困扰，因此建议用下面的这种方式：
+
+  ```
+  # ./DINA.py >DINAlog.txt 2>&1 &
+  ```
+
+  这里的>是定向符，可以将输出打印到日志文件，DINAlog.txt就是我建立的日志文件。>  默认为标准输出重定向，2>&1  意思是把 标准错误输出 重定向到 标准输出。
+

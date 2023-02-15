@@ -66,7 +66,8 @@ docker run -d \
     -e ENABLE_CJK_FONT=1 \
     -e VNC_PASSWORD=123 \
     -e KEEP_APP_RUNNING=1 \
-    -v $(pwd)/firefox:/config:rw \
+    -v $(pwd)/config/firefox:/config:rw \
+    -v $(pwd)/share/download/firefox:/config/downloads:rw \
     jlesage/firefox
 ```
 
@@ -295,5 +296,73 @@ docker run  -d -h mail.ewomail.com --restart=always \
 
 
 ```bash
+docker run --name zabbix-appliance -t  -d \
+      -e PHP_TZ="Asia/Shanghai" \
+      -v /etc/timezone:/etc/timezone \
+      -v /etc/localtime:/etc/localtime \
+      -p 7051:10051  -p 7080:80  \
+      zabbix/zabbix-appliance:latest
 
+```
+
+docker run --name mysql-server -t \
+      -e MYSQL_DATABASE="zabbix" \
+      -e MYSQL_USER="zabbixadmin" \
+      -e MYSQL_PASSWORD="zabbixpwd" \
+      -e MYSQL_ROOT_PASSWORD="zabbixroot" \
+      -v /usr/local/docker/mysql:/var/lib/mysql \
+      -v /etc/localtime:/etc/localtime \
+      -d mysql:5.7 \
+      --character-set-server=utf8 \
+      --collation-server=utf8_bin 
+
+
+
+
+
+docker run --name zabbix-server-mysql -t \
+      -e DB_SERVER_HOST="mysql-server" \
+      -e MYSQL_DATABASE="zabbix" \
+      -e MYSQL_USER="zabbixadmin" \
+      -e MYSQL_PASSWORD="zabbixpwd" \
+      -e MYSQL_ROOT_PASSWORD="zabbixroot" \
+      -v /etc/localtime:/etc/localtime \
+      --link mysql-server:mysql \
+      -p 10051:10051 \
+      -d zabbix/zabbix-server-mysql:centos-5.4.0
+
+docker run --name zabbix-web-nginx-mysql -t \
+      -e DB_SERVER_HOST="mysql-server" \
+      -e MYSQL_DATABASE="zabbix" \
+      -e MYSQL_USER="zabbixadmin" \
+      -e MYSQL_PASSWORD="zabbixpwd" \
+      -e MYSQL_ROOT_PASSWORD="zabbixroot" \
+      -v /etc/localtime:/etc/localtime \
+      --link mysql-server:mysql \
+      --link zabbix-server-mysql:zabbix-server \
+      -p 5080:8080 \
+      -d zabbix/zabbix-web-nginx-mysql:centos-5.4.0
+
+```shell
+docker run -td \
+  --restart=always \
+  --network=host \
+  -v /config:/config \
+  oznu/guacamole
+```
+
+docker run --name zabbix-agent \
+	  --restart=always \
+	  --network=host \
+      -e ZBX_HOSTNAME="Tomcat1V3_agent" \
+      -e ZBX_SERVER_HOST="10.0.1.17" \
+      -e ZBX_METADATA="Tomcat1V3_agent" \
+      --privileged \
+      -d zabbix/zabbix-agent:alpine-4.0.24
+
+
+
+
+```
+docker run -p 4080:80 -h icinga2 -t jordan/icinga2:latest
 ```
