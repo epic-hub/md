@@ -56,23 +56,6 @@ aarch64-linux-gnu-objdump
 wms_server
 
 
-各位领导、同事：
-    上午好！
-    广发银行将为九联小伙伴上门办理惠州社保卡，具体安排如下：
-
-    办理时间：本周三（明天）上午09：00
-    办理地点：五楼咖啡吧
-    办理要求：本人携带身份证、手机现场办理
-    
-    如有需要办理的，可点击以下链接报名登记，广发银行统一登门办理。
-【腾讯文档】社保卡办理登记
-https://docs.qq.com/form/page/DZUdnVkhvQVNKc3ho
-
-       如有疑问，可联系人力资源1部 韦嘉纯 处。
-    
-                   人力资源1部
-
-
 
 
 
@@ -84,3 +67,10 @@ git clean -fdx
 
 ln -sf /usr/lib/libfreetype.so /usr/lib/libfreetype.so.6	链接
 sed -i 's#//foundation#\$foundation#' `grep "//foundation" -rl ./`	替换
+
+
+
+
+
+
+
