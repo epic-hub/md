@@ -51,6 +51,8 @@ docker info
 
 ```
 export DOCKER=/home/docker/
+export DATA=/home/sdb
+export DOWNLOAD=/home/sdb/share/download
 ```
 
 ​	
@@ -94,3 +96,77 @@ docker run -d \
   lscr.io/linuxserver/heimdall:latest
 ```
 
+```bash
+docker run --restart=always -d -v $DATA:/srv -v $DOCKER/filebrowser/filebrowserconfig.json:/etc/config.json -v $DOCKER/filebrowser/database.db:/etc/database.db -p 2052:80 filebrowser/filebrowser
+```
+
+```bash
+docker run -d \
+    --name aria2-pro \
+    --restart=always \
+    --log-opt max-size=1m \
+    -e PUID=$UID \
+    -e PGID=$GID \
+    -e UMASK_SET=022 \
+    -e RPC_SECRET=password \
+    -e RPC_PORT=6800 \
+    -p 6800:6800 \
+    -e LISTEN_PORT=6888 \
+    -p 6888:6888 \
+    -p 6888:6888/udp \
+    -v $DOCKER/aria2-pro:/config \
+    -v $DOWNLOAD:/downloads \
+    p3terx/aria2-pro
+```
+
+```bash
+docker run -d \
+    --name ariang \
+    --log-opt max-size=1m \
+    --restart=always \
+    --network host \
+    p3terx/ariang --port 6880 --ipv6
+```
+
+```bash
+docker run -d --restart=always -v $DOCKER/alist:/opt/alist/data -p 5244:5244 --name="alist" xhofe/alist:latest
+```
+
+```bash
+docker run --restart=always --name filetash -d -p 8334:8334 machines/filestash
+```
+
+```bash
+
+docker run --name nginx  -d nginx
+
+
+# 将容器nginx.conf文件复制到宿主机
+docker cp nginx:/etc/nginx/nginx.conf $DOCKER/nginx/conf/nginx.conf
+# 将容器conf.d文件夹下内容复制到宿主机
+docker cp nginx:/etc/nginx/conf.d $DOCKER/nginx/conf/conf.d
+# 将容器中的html文件夹复制到宿主机
+docker cp nginx:/usr/share/nginx/html $DOCKER/nginx/
+
+docker rm -f nginx
+
+docker run  --name nginx -d --restart=always --net=host -v $DOCKER/nginx/html:/usr/share/nginx/html -v $DOCKER/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v $DOCKER/nginx/conf/conf.d:/etc/nginx/conf.d  -v $DOCKER/nginx/logs:/var/log/nginx nginx
+```
+
+
+
+
+
+# 说明
+
+## filebrowser/filebrowser
+
+user：admin
+
+password：admin
+
+## oznu/guacamole
+
+user: guacadmin
+
+password: guacadmin
