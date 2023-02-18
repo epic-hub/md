@@ -153,6 +153,18 @@ docker rm -f nginx
 docker run  --name nginx -d --restart=always --net=host -v $DOCKER/nginx/html:/usr/share/nginx/html -v $DOCKER/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v $DOCKER/nginx/conf/conf.d:/etc/nginx/conf.d  -v $DOCKER/nginx/logs:/var/log/nginx nginx
 ```
 
+```bash
+docker run -dit \
+   -v $DOCKER/ql/config:/ql/config \
+   -v $DOCKER/ql/log:/ql/log \
+   -v $DOCKER/ql/db:/ql/db \
+   -p 5700:5700 \
+   --name qinglong \
+   --hostname qinglong \
+   --restart always \
+   whyour/qinglong:latest
+```
+
 
 
 
@@ -170,3 +182,4 @@ password：admin
 user: guacadmin
 
 password: guacadmin
+
