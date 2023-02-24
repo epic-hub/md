@@ -23,7 +23,9 @@ jobs查看进程
 fg
 
 grep ^ /sys/block/*/queue/rotational 磁盘	lsblk     df
-lscpu	cpu
+lscpu		cat /proc/cpuinfo	
+
+cpu
 free -m  内存
 
 free -h
