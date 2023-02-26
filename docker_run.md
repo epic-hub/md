@@ -144,7 +144,7 @@ docker run --name nginx  -d nginx
 # 将容器nginx.conf文件复制到宿主机
 docker cp nginx:/etc/nginx/nginx.conf $DOCKER/nginx/conf/nginx.conf
 # 将容器conf.d文件夹下内容复制到宿主机
-docker cp nginx:/etc/nginx/conf.d $DOCKER/nginx/conf/conf.d
+docker cp nginx:/etc/nginx/conf.d $DOCKER/nginx/conf/
 # 将容器中的html文件夹复制到宿主机
 docker cp nginx:/usr/share/nginx/html $DOCKER/nginx/
 
