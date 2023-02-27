@@ -40,3 +40,14 @@ find ./test/ | grep -v keep | xargs rm #删除当前test文件夹中keep文件�
 find ./ -name ‘[k][e][e][p]’ -exec rm -rf {} ; #删除keep以外的其他文件。
 find ./ -name '[k][e][e][p]’ | xargs rm -rf #删除keep以外的其他文件。推荐！
 说明：上面第二行的代码效率高些，原因在于删除多个文件时 -exec会启动多个进程来处理，而xargs会启动一个rm进程来处理。
+
+
+
+
+
+
+
+```
+md5sum	#文件
+```
+
