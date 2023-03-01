@@ -9,3 +9,18 @@ sudo apt install device-tree-compiler
 ```bash
 dtc -I dtb -O dts dtb_name.dtb -o dts_name.dts
 ```
+
+
+
+DCB转DTS：
+
+```shell
+./dtc -I dtb -O dts -o *.dts *.dtb
+
+```
+
+DTS转DTB：
+
+```shell
+./dtc -I dts -O dtb -o test.dtb test.dts
+```
