@@ -183,3 +183,8 @@ user: guacadmin
 
 password: guacadmin
 
+## xhofe/alist
+
+如果您是站点的所有者，您可以通过在终端中运行 `./alist admin` 来获取管理员账号信息。
+
+https://alist.nn.ci/zh/guide/drivers/baidu.html
