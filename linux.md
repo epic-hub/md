@@ -105,3 +105,11 @@ G Get Help      ^O Write Out     ^W Where Is      ^K Cut Text      ^J Justify   
 | $@   | 与$*相同，但是使用时加引号，并在引号中返回每个参数。  如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。 |
 | $-   | 显示Shell使用的当前选项，与[set命令](https://www.runoob.com/linux/linux-comm-set.html)功能相同。 |
 | $?   | 显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。 |
+
+# ssh
+
+```
+ssh-keygen -t ed25519 -C "xxxxx@xxxxx.com"  
+cat ~/.ssh/id_ed25519.pub
+```
+
