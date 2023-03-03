@@ -114,3 +114,113 @@ acme.sh --install-cert -d djw0.tk -d *.djw0.tk \
 --fullchain-file /home/docker/nginx/conf/conf.d/cert.pem 
 ```
 
+```
+curl https://get.acme.sh | sh
+
+export DP_Id="390654"
+export DP_Key="95c8f18944e557de589409b77ec9a622"
+acme.sh  --issue --dns dns_dp -d djw0.tk -d *.djw0.tk
+
+
+export CF_Key="1YkWjG-Pva5BY94Tzrifo3KLXlY1ZVNmB9F8Q0JL"
+export CF_Email="epicfor1024@gmail.com"
+acme.sh  --issue --dns dns_cf -d 991105.xyz -d *.991105.xyz
+
+
+# domain自行替换成自己的域名
+server {
+    server_name xx.domain.com;
+    listen 443 http2 ssl;
+    ssl_certificate /path/.acme.sh/domain/fullchain.cer;
+    ssl_certificate_key /path/.acme.sh/domain/domain.key;
+    ssl_trusted_certificate  /path/.acme.sh/domain/ca.cer;
+
+    location / {
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_pass http://127.0.0.1:10086;
+    }
+}
+
+
+
+	ssl_certificate /etc/nginx/conf.d/djw0.tk_ecc/fullchain.cer;
+    ssl_certificate_key /etc/nginx/conf.d/djw0.tk_ecc/djw0.tk.key;
+    ssl_trusted_certificate  /etc/nginx/conf.d/djw0.tk_ecc/ca.cer;
+    
+    /*.991105.xyz_ecc
+    
+    
+    
+server {
+    listen 80;
+    listen  [::]:80;
+    listen 443 ssl;
+    listen  [::]:443 ssl;
+
+    server_name djw0.tk;
+    ssl_certificate /etc/nginx/conf.d/djw0.tk_ecc/fullchain.cer;
+    ssl_certificate_key /etc/nginx/conf.d/djw0.tk_ecc/djw0.tk.key;
+    ssl_trusted_certificate  /etc/nginx/conf.d/djw0.tk_ecc/ca.cer;
+
+    if ($scheme = http) {
+        return 301 https://$server_name$request_uri;
+    }
+    
+    location / {
+        proxy_set_header Host $host;
+        proxy_pass https://192.168.1.201;
+    }
+
+}
+
+server {
+    listen 80;
+    listen  [::]:80;
+    listen 443 ssl;
+    listen  [::]:443 ssl;
+
+    server_name djw0.tk;
+    ssl_certificate /etc/nginx/conf.d/*.djw0.tk_ecc/fullchain.cer;
+    ssl_certificate_key /etc/nginx/conf.d/*.djw0.tk_ecc/*.djw0.tk.key;
+    ssl_trusted_certificate  /etc/nginx/conf.d/*.djw0.tk_ecc/ca.cer;
+
+    if ($scheme = http) {
+        return 301 https://$server_name$request_uri;
+    }
+    
+    location / {
+        proxy_set_header Host $host;
+        proxy_pass https://192.168.1.201;
+    }
+
+}
+```
+
+# 模板
+
+```
+server {
+    listen 80;
+    listen  [::]:80;
+    listen 443 ssl;
+    listen  [::]:443 ssl;
+
+    server_name f.djw0.tk;
+    ssl_certificate /etc/nginx/conf.d/*.djw0.tk_ecc/fullchain.cer;
+    ssl_certificate_key /etc/nginx/conf.d/*.djw0.tk_ecc/*.djw0.tk.key;
+    ssl_trusted_certificate  /etc/nginx/conf.d/*.djw0.tk_ecc/ca.cer;
+
+    if ($scheme = http) {
+        return 301 https://$server_name$request_uri;
+    }
+
+    location / {
+        proxy_set_header Host $host;
+        proxy_pass http://127.0.0.1:2052;
+    }
+
+}
+
+```
+

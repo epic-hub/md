@@ -366,3 +366,23 @@ docker run --name zabbix-agent \
 ```
 docker run -p 4080:80 -h icinga2 -t jordan/icinga2:latest
 ```
+
+# 失败
+
+```
+docker run --rm  -it  \
+  -v "$DOCKER/nginx/conf/conf.d/acme":/acme.sh  \
+  -e DP_Id="390654" \
+  -e DP_Key="95c8f18944e557de589409b77ec9a622" \
+  neilpang/acme.sh  --issue --dns dns_dp -d djw0.tk -d *.djw0.tk 
+  
+  
+  
+  --register-account -m 872218780@qq.com
+  epicfor1024@gmail.com
+  https://console.dnspod.cn/account/token/token
+  https://github.com/acmesh-official/acme.sh/wiki/dnsapi
+```
+
+
+
