@@ -169,7 +169,7 @@ server {
     
     location / {
         proxy_set_header Host $host;
-        proxy_pass https://192.168.1.201;
+        proxy_pass http://127.0.0.1:4433;
     }
 
 }
@@ -180,7 +180,7 @@ server {
     listen 443 ssl;
     listen  [::]:443 ssl;
 
-    server_name djw0.tk;
+    server_name g.djw0.tk;
     ssl_certificate /etc/nginx/conf.d/*.djw0.tk_ecc/fullchain.cer;
     ssl_certificate_key /etc/nginx/conf.d/*.djw0.tk_ecc/*.djw0.tk.key;
     ssl_trusted_certificate  /etc/nginx/conf.d/*.djw0.tk_ecc/ca.cer;
@@ -191,7 +191,7 @@ server {
     
     location / {
         proxy_set_header Host $host;
-        proxy_pass https://192.168.1.201;
+        proxy_pass http://127.0.0.1:8080;
     }
 
 }

@@ -50,14 +50,6 @@ git log
 git reset e51cef52c610d8b873e99e4ea83fbc84c1728906	返回
 
 
-./vendor/etc/init.A311D.cfg
-
-
-aarch64-linux-gnu-objdump
-
-wms_server
-
-
 
 
 

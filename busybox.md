@@ -55,3 +55,11 @@ function replace_data()
 cmp libdisplay_layer.so libdisplay_layer.so.test -l
 ```
 
+# tar
+
+```
+[root@linux ~]# tar -cvf /tmp/etc.tar /etc <==仅打包，不压缩！
+[root@linux ~]# tar -zcvf /tmp/etc.tar.gz /etc <==打包后，以 gzip 压缩
+[root@linux ~]# tar -jcvf /tmp/etc.tar.bz2 /etc <==打包后，以 bzip2 压缩
+```
+

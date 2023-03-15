@@ -1,0 +1,1 @@
+ctrl+shift+f	繁体切换
